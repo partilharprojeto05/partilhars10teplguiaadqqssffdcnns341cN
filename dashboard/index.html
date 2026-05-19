@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sistema de gestão de doadores do Grupo Partilhar — dashboard administrativo." />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Dashboard — Grupo Partilhar</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="stylesheet" href="assets/css/cadastro.css" />
+  <link rel="stylesheet" href="assets/css/relatorios.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar" class="navbar" role="banner"></header>
+
+  <!-- ══ DASHBOARD ══ -->
+  <main id="page-dashboard" class="app-wrapper hidden" role="main">
+    <div class="page-container">
+      <div class="page-decoration" aria-hidden="true">
+        <div class="decoration-dot decoration-dot--pink"></div>
+        <div class="decoration-dot decoration-dot--green"></div>
+        <div class="decoration-dot decoration-dot--blue"></div>
+      </div>
+      <div class="page-header">
+        <h1 class="page-title">Dashboard de Doadores</h1>
+        <p class="page-subtitle">Gerencie e acompanhe todos os doadores do Grupo Partilhar</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card stat-card--pink">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Total de Doadores</div>
+          <div class="stat-card__value" id="stat-total">—</div>
+        </div>
+        <div class="stat-card stat-card--green">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Doadores Ativos</div>
+          <div class="stat-card__value" id="stat-ativos">—</div>
+        </div>
+        <div class="stat-card stat-card--blue">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Total Previsto para o mês</div>
+          <div class="stat-card__value" id="stat-valor">—</div>
+        </div>
+        <div class="stat-card stat-card--amber">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Doações Pendentes</div>
+          <div class="stat-card__value" id="stat-pendentes">—</div>
+        </div>
+      </div>
+      <div class="dashboard-toolbar">
+        <div class="search-bar">
+          <span class="search-bar__icon"></span>
+          <input type="search" id="search-input" name="search" placeholder="Buscar por nome, email ou telefone..."
+            autocomplete="off" aria-label="Buscar doador" />
+        </div>
+        <select id="filter-status" class="filter-select" aria-label="Filtrar por status">
+          <option value="todos">Todos</option>
+          <option value="ativo">Ativos</option>
+          <option value="pendente">Pendentes</option>
+          <option value="inativo">Inativos</option>
+        </select>
+        <button id="btn-new-donor" class="btn btn-primary">＋ Novo Doador</button>
+      </div>
+      <div class="table-wrapper table-responsive">
+        <table class="table" aria-label="Lista de doadores">
+          <thead>
+            <tr>
+              <th>Doador</th>
+              <th class="col-hide-mobile">Contato</th>
+              <th class="col-hide-mobile">Tipo</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th class="col-hide-mobile">Próxima Doação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="donors-tbody"></tbody>
+        </table>
+        <div id="donors-empty" class="empty-state hidden">
+          <div class="empty-state__icon"></div>
+          <div class="empty-state__title">Nenhum doador encontrado</div>
+          <p>Tente ajustar o filtro ou a busca.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ══ CADASTRO ══ -->
+  <main id="page-cadastro" class="app-wrapper hidden" role="main">
+    <div class="page-container">
+      <div class="cadastro-layout">
+        <button class="back-link" id="btn-back">← Voltar</button>
+        <div class="page-header">
+          <h1 class="page-title">Cadastrar Novo Doador</h1>
+          <p class="page-subtitle">Preencha os dados para adicionar um novo doador ao sistema</p>
+        </div>
+        <form id="form-cadastro" novalidate>
+          <!-- Informações Pessoais -->
+          <div class="form-section">
+            <div class="form-section__header">
+              <div class="form-section__icon"></div>
+              <h2 class="form-section__title">Informações Pessoais</h2>
+            </div>
+            <div class="form-group" style="margin-bottom:var(--space-5);">
+              <label class="form-label" for="nome">Nome Completo <span class="required">*</span></label>
+              <input type="text" id="nome" name="nome" class="form-input" placeholder="Digite o nome completo"
+                autocomplete="name" required />
+              <span class="form-error" id="error-nome"></span>
+            </div>
+            <div class="form-grid" style="margin-bottom:var(--space-5);">
+              <div class="form-group">
+                <label class="form-label" for="email">E-mail <span class="required">*</span></label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="email@exemplo.com"
+                  autocomplete="email" required />
+                <span class="form-error" id="error-email"></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="telefone">Telefone (WhatsApp) <span class="required">*</span></label>
+                <input type="tel" id="telefone" name="telefone" class="form-input" placeholder="(00) 00000-0000"
+                  autocomplete="tel" maxlength="15" required />
+                <span class="form-error" id="error-telefone"></span>
+              </div>
+            </div>
+
+            <!-- Doação -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <div class="form-section__icon"></div>
+                <h2 class="form-section__title">Informações de Doação</h2>
+              </div>
+              <div class="form-group" style="margin-bottom:var(--space-6);">
+                <label class="form-label">Tipo de Doação <span class="required">*</span></label>
+                <div class="radio-cards">
+                  <div class="radio-card">
+                    <input type="radio" id="tipo-dinheiro" name="tipoDoacao" value="dinheiro" checked />
+                    <label class="radio-card__label" for="tipo-dinheiro">
+                      <span class="radio-card__icon"></span>
+                      <span class="radio-card__text">Dinheiro</span>
+                      <span class="radio-card__sub">Doação financeira</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="tipo-alimentos" name="tipoDoacao" value="alimentos" />
+                    <label class="radio-card__label" for="tipo-alimentos">
+                      <span class="radio-card__icon"></span>
+                      <span class="radio-card__text">Alimentos</span>
+                      <span class="radio-card__sub">Cestas e alimentos</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="tipo-ambos" name="tipoDoacao" value="ambos" />
+                    <label class="radio-card__label" for="tipo-ambos">
+                      <span class="radio-card__icon"></span>
+                      <span class="radio-card__text">Ambos</span>
+                      <span class="radio-card__sub">Dinheiro e alimentos</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-grid" style="margin-bottom:var(--space-5);">
+                <div class="form-group">
+                  <label class="form-label" for="freqDoacao">Frequência <span class="required">*</span></label>
+                  <select id="freqDoacao" name="freqDoacao" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="mensal">Doação Mensal Recorrente</option>
+                    <option value="unica">Doação Única</option>
+                  </select>
+                  <span class="form-error" id="error-freqDoacao"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="compromisso">Tempo de Compromisso <span
+                      class="required">*</span></label>
+                  <select id="compromisso" name="compromisso" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="6meses">6 Meses</option>
+                    <option value="1ano">1 Ano</option>
+                    <option value="indeterminado">Indeterminado</option>
+                  </select>
+                  <span class="form-error" id="error-compromisso"></span>
+                </div>
+              </div>
+              <div class="form-group" style="max-width:280px;">
+                <label class="form-label" for="valorEstimado">Valor Estimado (R$)</label>
+                <input type="number" id="valorEstimado" name="valorEstimado" class="form-input" placeholder="0,00"
+                  min="0" step="0.01" />
+                <span class="form-hint">Valor mensal estimado da doação</span>
+                <span class="form-error" id="error-valorEstimado"></span>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" id="btn-reset" class="btn btn-secondary"> Limpar</button>
+              <button type="submit" id="btn-submit" class="btn btn-primary"> Salvar Doador</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ══ RELATÓRIOS ══ -->
+  <main id="page-relatorios" class="app-wrapper hidden" role="main">
+    <div class="page-container">
+      <div class="relatorios-header">
+        <div>
+          <h1 class="page-title">Relatórios</h1>
+          <p class="page-subtitle">Visualize e exporte relatórios mensais de doações</p>
+        </div>
+        <div class="relatorios-controls">
+          <input type="month" id="month-picker" class="month-picker" aria-label="Selecionar mês e ano" />
+          <button id="btn-export" class="btn btn-primary"> Exportar CSV</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card stat-card--pink">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Total de Doadores</div>
+          <div class="stat-card__value" id="rel-total">—</div>
+        </div>
+        <div class="stat-card stat-card--green">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Doações Recebidas</div>
+          <div class="stat-card__value" id="rel-recebidas">—</div>
+        </div>
+        <div class="stat-card stat-card--blue">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Total Arrecadado</div>
+          <div class="stat-card__value" id="rel-valor">—</div>
+        </div>
+        <div class="stat-card stat-card--amber">
+          <div class="stat-card__icon"></div>
+          <div class="stat-card__label">Doações Pendentes</div>
+          <div class="stat-card__value" id="rel-pendentes">—</div>
+        </div>
+      </div>
+      <p
+        style="text-align:right;margin-bottom:var(--space-4);font-size:var(--font-size-sm);color:var(--color-text-muted);">
+        Período: <strong id="rel-period" style="color:var(--color-text-dark);">—</strong>
+      </p>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <span class="chart-card__icon"></span>
+            <h2 class="chart-card__title">Doadores por Status</h2>
+          </div>
+          <div class="chart-container"><canvas id="chart-status"></canvas></div>
+          <div class="chart-legend" id="legend-status"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <span class="chart-card__icon"></span>
+            <h2 class="chart-card__title">Tipo de Doação</h2>
+          </div>
+          <div class="chart-container"><canvas id="chart-tipo"></canvas></div>
+          <div class="chart-legend" id="legend-tipo"></div>
+        </div>
+        <div class="chart-card chart-card--full">
+          <div class="chart-card__header">
+            <span class="chart-card__icon"></span>
+            <h2 class="chart-card__title">Top 5 Doadores (Total Doado)</h2>
+          </div>
+          <div class="chart-container" style="height:240px;"><canvas id="chart-top"></canvas></div>
+        </div>
+        <div class="chart-card chart-card--full">
+          <div class="chart-card__header">
+            <span class="chart-card__icon"></span>
+            <h2 class="chart-card__title">Ranking de Doadores</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="top-table" aria-label="Ranking dos 5 maiores doadores">
+              <thead>
+                <tr>
+                  <th style="width:50px;">#</th>
+                  <th>Nome</th>
+                  <th>Tipo</th>
+                  <th>Total Doado</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="top5-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true">
+    <div id="modal" class="modal"></div>
+  </div>
+
+  <!-- TOASTS -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="assets/js/data/mockData.js"></script>
+  <!--
+    api-bridge.js (ES module):
+    1. Importa api.js e expõe window.PartilharAPI
+    2. Carrega app.js dinamicamente DEPOIS que o namespace estiver pronto
+  -->
+  <script type="module" src="assets/js/api-bridge.js"></script>
+</body>
+
+</html>

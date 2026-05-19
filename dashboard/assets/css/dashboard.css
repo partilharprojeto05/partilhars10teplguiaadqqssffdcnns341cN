@@ -1,0 +1,155 @@
+/* ============================================================
+   GRUPO PARTILHAR — Dashboard Page
+   ============================================================ */
+
+/* ── Toolbar (busca + filtro + botão) ── */
+.dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.dashboard-toolbar .search-bar {
+  min-width: 240px;
+}
+
+.filter-select {
+  padding: var(--space-3) var(--space-10) var(--space-3) var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dark);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-base);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239090b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+}
+
+.filter-select:focus {
+  border-color: var(--color-pink-500);
+  box-shadow: 0 0 0 3px rgb(240 145 155 / 0.18);
+}
+
+/* ── Donor Name Cell ── */
+.donor-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.donor-avatar-sm {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--gradient-pink);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.donor-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-dark);
+  font-size: var(--font-size-sm);
+}
+
+.donor-city {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── Contact Cell ── */
+.contact-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-cell__phone {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dark);
+}
+
+.contact-cell__email {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── Value Cell ── */
+.value-cell {}
+
+.value-cell__main {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-dark);
+  font-size: var(--font-size-sm);
+}
+
+.value-cell__total {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── Actions Cell ── */
+.actions-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ── Decoration ── */
+.page-decoration {
+  position: fixed;
+  right: var(--space-6);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.decoration-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.decoration-dot--pink  { background: var(--color-pink-500); }
+.decoration-dot--green { background: var(--color-green-500); }
+.decoration-dot--blue  { background: var(--color-blue-500); }
+
+@media (max-width: 1024px) {
+  .page-decoration {
+    display: none;
+  }
+
+  .dashboard-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-toolbar .search-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Oculta colunas menos importantes no mobile */
+  .col-hide-mobile {
+    display: none;
+  }
+}
