@@ -436,7 +436,10 @@ function _bindDashEvents() {
 ══════════════════════════════ */
 var _cadastroEventsInit = false;
 function initCadastro() {
-  if (_cadastroEventsInit) return;
+  if (_cadastroEventsInit) {
+    handleTipoDoacaoChange();
+    return;
+  }
   _cadastroEventsInit = true;
 
   document.getElementById('btn-back').addEventListener('click', function () { navigateTo('dashboard'); });
@@ -444,6 +447,12 @@ function initCadastro() {
     document.getElementById('form-cadastro').reset();
     document.querySelectorAll('.form-input.error,.form-select.error').forEach(function (el) { el.classList.remove('error'); });
     document.querySelectorAll('.form-error.visible').forEach(function (el) { el.classList.remove('visible'); });
+    handleTipoDoacaoChange();
+  });
+
+  // Desabilitar valor estimado quando tipo = alimentos
+  document.querySelectorAll('input[name="tipoDoacao"]').forEach(function (radio) {
+    radio.addEventListener('change', handleTipoDoacaoChange);
   });
 
   var telInput = document.getElementById('telefone');
@@ -452,6 +461,27 @@ function initCadastro() {
   }
 
   document.getElementById('form-cadastro').addEventListener('submit', handleCadastroSubmit);
+
+  handleTipoDoacaoChange();
+}
+
+function handleTipoDoacaoChange() {
+  var selecionado = (document.querySelector('input[name="tipoDoacao"]:checked') || {}).value;
+  var valorInput = document.getElementById('valorEstimado');
+  var valorGroup = valorInput ? valorInput.closest('.form-group') : null;
+
+  if (!valorInput) return;
+
+  if (selecionado === 'alimentos') {
+    valorInput.value = '';
+    valorInput.disabled = true;
+    valorInput.placeholder = 'Não aplicável para alimentos';
+    if (valorGroup) valorGroup.style.opacity = '0.45';
+  } else {
+    valorInput.disabled = false;
+    valorInput.placeholder = '0,00';
+    if (valorGroup) valorGroup.style.opacity = '1';
+  }
 }
 
 async function handleCadastroSubmit(e) {
@@ -464,7 +494,7 @@ async function handleCadastroSubmit(e) {
   var data = {
     nome: get('nome').trim(), email: get('email').trim(), telefone: get('telefone').trim(),
     tipoDoacao: tipoDoacao, freqDoacao: get('freqDoacao'), compromisso: get('compromisso'),
-    valorEstimado: parseFloat(get('valorEstimado')) || 0
+    valorEstimado: tipoDoacao === 'alimentos' ? 0 : (parseFloat(get('valorEstimado')) || 0)
   };
 
   var errors = {};
