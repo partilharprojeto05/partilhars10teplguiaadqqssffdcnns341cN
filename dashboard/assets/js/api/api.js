@@ -20,7 +20,7 @@
 // ── Configuração ──────────────────────────────────────────────
 // URL base do backend Node.js/Express.
 // Em produção, troque pelo domínio do servidor deployado.
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://site-back-jqih.onrender.com';
 
 // true  → usa mockData.js (sem backend, sem internet)
 // false → usa o backend Node.js real
