@@ -56,7 +56,7 @@ export function initNavbar(navigateTo) {
 
   // ── Eventos ──
   const mobileToggle = document.getElementById('nav-mobile-toggle');
-  const mobileMenu   = document.getElementById('nav-mobile-menu');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
 
   mobileToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
