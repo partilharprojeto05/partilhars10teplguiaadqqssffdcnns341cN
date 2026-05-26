@@ -36,7 +36,7 @@
 
 .month-picker:focus {
   border-color: var(--color-pink-500);
-  box-shadow: 0 0 0 3px rgb(240 145 155 / 0.18);
+  box-shadow: 0 0 0 3px rgb(233 108 115 / 0.18);
 }
 
 /* ── Charts Grid ── */
@@ -53,6 +53,7 @@
   padding: var(--space-6);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
+  min-width: 0;
 }
 
 .chart-card__header {
@@ -76,6 +77,12 @@
 .chart-container {
   position: relative;
   height: 280px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.chart-container canvas {
+  max-width: 100% !important;
 }
 
 .chart-card--full {
@@ -148,13 +155,26 @@
   color: white;
 }
 
-.rank-1 { background: #BFA099; }
-.rank-2 { background: #C0B0AC; }
-.rank-3 { background: #A28A84; }
-.rank-other { background: var(--color-pink-300); color: var(--color-pink-500); }
+.rank-1 { background: #E8B800; color: #3D2B00; }
+.rank-2 { background: #FAE27A; color: #5C4A00; }
+.rank-3 { background: #95A82E; color: #ffffff; }
+.rank-other { background: var(--color-pink-100); color: var(--color-pink-500); }
 
+/* ══ Relatórios: stats-grid alinhado com a largura dos gráficos ══ */
+/* Tablet: 2 colunas (igual ao charts-grid) */
+@media (max-width: 1024px) {
+  #page-relatorios .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 coluna (igual ao ranking e charts-grid) */
 @media (max-width: 768px) {
   .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #page-relatorios .stats-grid {
     grid-template-columns: 1fr;
   }
 
@@ -165,5 +185,11 @@
 
   .relatorios-controls {
     flex-direction: column;
+  }
+
+  .relatorios-controls .btn,
+  .relatorios-controls .month-picker {
+    width: 100%;
+    justify-content: center;
   }
 }

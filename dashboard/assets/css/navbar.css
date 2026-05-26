@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   padding: 0 var(--space-6);
-  box-shadow: 0 2px 16px rgb(240 145 155 / 0.08);
+  box-shadow: 0 2px 16px rgb(233 108 115 / 0.08);
 }
 
 .navbar__inner {

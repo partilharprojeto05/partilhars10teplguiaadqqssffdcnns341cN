@@ -138,9 +138,9 @@ function openDonorModal(donor) {
     + _infoItem(' Cadastrado em', window.Partilhar.formatDate(donor.dataCadastro))
     + '</div>'
     + '<div class="modal-footer" id="modal-footer">'
-    + '<button class="btn btn-ghost" id="modal-delete-btn"> Excluir</button>'
-    + '<button class="btn btn-primary btn-sm" id="modal-register-btn" style="margin-right:auto;"> Registrar Doação</button>'
-    + (donor.status !== 'ativo' ? '<button class="btn btn-success btn-sm" id="modal-activate-btn"> Marcar como Ativo</button>' : '<button class="btn btn-secondary btn-sm" id="modal-deactivate-btn">⏸ Pendente</button>')
+    + '<button class="btn btn-secondary" id="modal-delete-btn" style="border-color:#fca5a5;color:#ef4444;"> Excluir</button>'
+    + '<button class="btn btn-primary" id="modal-register-btn" style="margin-right:auto;"> Registrar Doação</button>'
+    + (donor.status !== 'ativo' ? '<button class="btn btn-success" id="modal-activate-btn"> Marcar como Ativo</button>' : '<button class="btn btn-secondary" id="modal-deactivate-btn">⏸ Pendente</button>')
     + '<a href="https://wa.me/' + waNumber + '" target="_blank" rel="noopener" class="btn btn-success" style="background:var(--gradient-green);"> WhatsApp</a>'
     + '</div>';
 
@@ -376,10 +376,10 @@ async function _renderDashTable() {
       : window.Partilhar.formatDate(d.dataProximaDoa);
     row += '<td class="col-hide-mobile">' + proxHtml + '</td>';
     row += '<td><div class="actions-cell">';
-    row += '<button class="btn-icon btn-view" data-id="' + d.id + '" title="Ver detalhes">'
+    row += '<button class="btn-icon btn-view" data-id="' + d.id + '" title="Editar doador">'
       + '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
-      + '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>'
-      + '<circle cx="12" cy="12" r="3"/>'
+      + '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>'
+      + '<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>'
       + '</svg></button>';
     row += '<button class="btn-icon btn-delete" data-id="' + d.id + '" data-nome="' + d.nome + '" title="Excluir doador" style="border-color:#fca5a5;color:#ef4444;">'
       + '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
@@ -543,7 +543,7 @@ function maskPhone(v) {
    RELATÓRIOS + CHARTS
 ══════════════════════════════ */
 var _chartStatus = null, _chartTipo = null, _chartTop = null;
-var CHART_COLORS = { pink: '#F0919B', pink2: '#F5AEBA', green: '#D2E896', blue: '#A28A84', amber: '#BFA099', gray: '#C0B0AC' };
+var CHART_COLORS = { pink: '#E96C73', pink2: '#EF8F95', green: '#95A82E', blue: '#7D6A66', amber: '#F7D94C', gray: '#AABF45' };
 
 function initRelatorios() {
   var now = new Date();
@@ -618,7 +618,7 @@ function _renderTopChart(top5) {
   _chartTop = new Chart(ctx, {
     type: 'bar',
     data: { labels: labels, datasets: [{ label: 'Total Doado (R$)', data: data, backgroundColor: bgs, borderRadius: 8, borderSkipped: false }] },
-    options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false }, ticks: { color: '#A28A84', font: { family: 'Inter', size: 12 } } }, y: { grid: { color: '#E8E2E0' }, ticks: { color: '#A28A84', font: { family: 'Inter', size: 11 }, callback: function (v) { return 'R$ ' + v.toLocaleString('pt-BR'); } } } }, plugins: { legend: { display: false } } }
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false }, ticks: { color: '#7D6A66', font: { family: 'Inter', size: 12 } } }, y: { grid: { color: 'rgba(125, 106, 102, 0.15)' }, ticks: { color: '#7D6A66', font: { family: 'Inter', size: 11 }, callback: function (v) { return 'R$ ' + v.toLocaleString('pt-BR'); } } } }, plugins: { legend: { display: false } } }
   });
 }
 

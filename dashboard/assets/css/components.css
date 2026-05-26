@@ -47,7 +47,7 @@
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 24px 0 rgb(240 145 155 / 0.55);
+  box-shadow: 0 6px 24px 0 rgb(233 108 115 / 0.55);
   transform: translateY(-1px);
 }
 
@@ -71,7 +71,7 @@
 }
 
 .btn-success:hover {
-  box-shadow: 0 6px 24px 0 rgb(210 232 150 / 0.55);
+  box-shadow: 0 6px 24px 0 rgb(149 168 46 / 0.55);
   transform: translateY(-1px);
 }
 
@@ -87,8 +87,8 @@
 }
 
 .btn-icon {
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   padding: 0;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
@@ -286,17 +286,17 @@
 
 .badge--active {
   background: var(--color-green-100);
-  color: #5C8C2A;
+  color: #4A6618;
 }
 
 .badge--pending {
   background: var(--color-amber-100);
-  color: #8C6A5E;
+  color: #8C6A00;
 }
 
 .badge--inactive {
-  background: #EDE6E4;
-  color: #A28A84;
+  background: var(--color-blue-100);
+  color: var(--color-blue-500);
 }
 
 .badge--food {
@@ -360,7 +360,7 @@
 .form-textarea:focus {
   border-color: var(--color-pink-500);
   background: var(--color-white);
-  box-shadow: 0 0 0 3px rgb(240 145 155 / 0.18);
+  box-shadow: 0 0 0 3px rgb(233 108 115 / 0.18);
 }
 
 .form-input.error,
@@ -497,10 +497,21 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-6);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 540px) {
+  .modal-footer {
+    justify-content: stretch;
+  }
+  .modal-footer .btn {
+    flex: 1 1 calc(50% - var(--space-3));
+    justify-content: center;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -587,7 +598,7 @@
 
 .search-bar input:focus {
   border-color: var(--color-pink-500);
-  box-shadow: 0 0 0 3px rgb(240 145 155 / 0.18);
+  box-shadow: 0 0 0 3px rgb(233 108 115 / 0.18);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -646,7 +657,7 @@
 }
 
 .toast--success {
-  background: #5C8C2A;
+  background: #4A6618;
 }
 
 .toast--error {

@@ -6,44 +6,47 @@
 
 :root {
   /* ── Paleta Principal ── */
-  /* Rosa: #F0919B */
-  --color-pink-500: #F0919B;
-  --color-pink-400: #F5AEBA;
-  --color-pink-300: #F9CDD4;
-  --color-pink-100: #FDE8EB;
-  --color-pink-50:  #FEF4F5;
+  /* Rosa: #E96C73 */
+  --color-pink-500: #E96C73;
+  --color-pink-400: #EF8F95;
+  --color-pink-300: #F5B3B7;
+  --color-pink-100: #FCDCDE;
+  --color-pink-50:  #FEF0F1;
 
-  /* Verde: #D2E896 */
-  --color-green-500: #D2E896;
-  --color-green-400: #DDED9F;
-  --color-green-300: #E8F3C3;
-  --color-green-100: #F2F8DF;
+  /* Verde: #95A82E */
+  --color-green-500: #95A82E;
+  --color-green-400: #AABF45;
+  --color-green-300: #C4D474;
+  --color-green-100: #E4EDB6;
 
-  /* Cinza: #A28A84 */
-  --color-blue-500:  #A28A84;
-  --color-blue-100:  #E8E2E0;
+  /* Cinza: #7D6A66 */
+  --color-blue-500:  #7D6A66;
+  --color-blue-100:  #DDD6D5;
 
-  --color-amber-500: #BFA099;
-  --color-amber-100: #EDE6E4;
+  /* Amarelo: #F7D94C */
+  --color-amber-500: #F7D94C;
+  --color-amber-400: #FAE27A;
+  --color-amber-100: #FEF6C8;
 
   --color-red-500:  #ef4444;
   --color-red-100:  #fee2e2;
 
   /* ── Neutros ── */
   --color-white:      #FFFFFF;
-  --color-bg:         #FAF8F7;
+  --color-bg:         #FAF9F8;
   --color-surface:    #FFFFFF;
-  --color-border:     #E8E2E0;
+  --color-border:     rgba(125, 106, 102, 0.30);
+  --color-border-soft: rgba(125, 106, 102, 0.15);
   --color-text-dark:  #3D2B28;
   --color-text-body:  #6B5754;
-  --color-text-muted: #A28A84;
+  --color-text-muted: #7D6A66;
 
   /* ── Gradientes ── */
-  --gradient-pink:   linear-gradient(135deg, #F0919B 0%, #F5AEBA 100%);
-  --gradient-green:  linear-gradient(135deg, #D2E896 0%, #DDED9F 100%);
-  --gradient-blue:   linear-gradient(135deg, #A28A84 0%, #BFA099 100%);
-  --gradient-amber:  linear-gradient(135deg, #BFA099 0%, #CDB0A8 100%);
-  --gradient-hero:   linear-gradient(135deg, #FDE8EB 0%, #FAF8F7 50%, #F2F8DF 100%);
+  --gradient-pink:   linear-gradient(135deg, #E96C73 0%, #EF8F95 100%);
+  --gradient-green:  linear-gradient(135deg, #95A82E 0%, #AABF45 100%);
+  --gradient-blue:   linear-gradient(135deg, #7D6A66 0%, #9E8A86 100%);
+  --gradient-amber:  linear-gradient(135deg, #F7D94C 0%, #FAE27A 100%);
+  --gradient-hero:   linear-gradient(135deg, #FCDCDE 0%, #FAF9F8 50%, #E4EDB6 100%);
 
   /* ── Tipografia ── */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -86,8 +89,9 @@
   --shadow-md:  0 4px 12px 0 rgb(0 0 0 / 0.10);
   --shadow-lg:  0 10px 30px 0 rgb(0 0 0 / 0.12);
   --shadow-xl:  0 20px 50px 0 rgb(0 0 0 / 0.15);
-  --shadow-pink: 0 4px 20px 0 rgb(240 145 155 / 0.35);
-  --shadow-green: 0 4px 20px 0 rgb(210 232 150 / 0.40);
+  --shadow-pink: 0 4px 20px 0 rgb(233 108 115 / 0.35);
+  --shadow-green: 0 4px 20px 0 rgb(149 168 46 / 0.40);
+  --shadow-amber: 0 4px 20px 0 rgb(247 217 76 / 0.40);
 
   /* ── Transições ── */
   --transition-fast:   150ms ease;

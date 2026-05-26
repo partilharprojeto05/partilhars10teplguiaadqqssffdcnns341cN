@@ -89,8 +89,13 @@ window.Partilhar.TIPO_LABEL = {
 };
 
 window.Partilhar.COMP_LABEL = {
+  '1mes':          '1 Mês',
+  '2meses':        '2 Meses',
+  '3meses':        '3 Meses',
   '6meses':        '6 Meses',
+  '9meses':        '9 Meses',
   '1ano':          '1 Ano',
+  '2anos':         '2 Anos',
   'indeterminado': 'Indeterminado',
 };
 

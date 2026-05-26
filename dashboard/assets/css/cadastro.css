@@ -73,7 +73,7 @@
 .radio-card input:checked+.radio-card__label {
   border-color: var(--color-pink-500);
   background: var(--color-pink-50);
-  box-shadow: 0 0 0 3px #F0919B;
+  box-shadow: 0 0 0 3px rgb(233 108 115 / 0.25);
 }
 
 .radio-card__icon {

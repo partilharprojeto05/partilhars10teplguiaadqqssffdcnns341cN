@@ -34,7 +34,7 @@
 
 .filter-select:focus {
   border-color: var(--color-pink-500);
-  box-shadow: 0 0 0 3px rgb(240 145 155 / 0.18);
+  box-shadow: 0 0 0 3px rgb(233 108 115 / 0.18);
 }
 
 /* ── Donor Name Cell ── */
@@ -105,7 +105,9 @@
 .actions-cell {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-2);
+  max-width: 160px;
 }
 
 /* ── Decoration ── */
